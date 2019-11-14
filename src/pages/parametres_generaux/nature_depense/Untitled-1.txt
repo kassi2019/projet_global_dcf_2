@@ -1,0 +1,79 @@
+ <div class="container-fluid">
+                                            <hr>
+                                        <div class="row-fluid">
+                                          <div class="span12">
+                                              <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des normes de missions "
+                                              name ="Liste des norme de missions "
+                                              worksheet = "Normes de missions"
+                                            :data="historiques_missions">
+                        <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br>
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste des historiques de missions</h5>
+             <div align="right">
+        Rechercher: <input type="text" v-model="search">
+
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Type operation</th>
+                  <th>Date d'operation</th>
+                <th>Decision</th>
+                  
+                   <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                historiques_missions"
+                 :key="historiqueMission.id">
+                  <td @dblclick="afficherModalModifierNormeMission(index)">
+                      {{historiqueMission.type_operation || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierNormeMission(index)">
+                      {{historiqueMission.date_operation || 'Non renseigné'}}</td>
+                   
+                    <td @dblclick="afficherModalModifierNormeMission(index)">
+                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+
+                  <td  @dblclick="afficherModalModifierNormeMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="historiques_missions.length">    
+            </div>
+            <div v-else>
+              <div align="center">
+                <h6 style="color:red;">Aucune historique enregistrer </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>                    
+              </div>
+            </div>
